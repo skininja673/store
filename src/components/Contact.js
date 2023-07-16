@@ -12,11 +12,17 @@ const Contact = () => {
                         Nobis odio vero pariatur voluptate dicta expedita non
                         sit fuga excepturi corporis.
                     </p>
-                    <form action='' className='contact-form'>
+                    <form
+                        action='https://formspree.io/f/mpzgwawa'
+                        className='contact-form'
+                        method='POST'
+                    >
                         <input
                             type='email'
                             className='form-input'
                             placeholder='enter email'
+                            name='name'
+                            // sname='_replyto'
                         />
                         <button type='submit' className='submit-btn'>
                             subscribe
