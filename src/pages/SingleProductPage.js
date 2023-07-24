@@ -84,7 +84,9 @@ const SingleProductPage = () => {
                             {company}
                         </p>
                         <hr />
-                        {stock > 0 && <AddToCart />}
+
+                        {/* if there are stocks then only render AddtoCart component */}
+                        {stock > 0 && <AddToCart product={product} />}
                     </section>
                 </div>
             </div>
