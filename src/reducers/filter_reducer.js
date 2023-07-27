@@ -11,10 +11,15 @@ import {
 
 const filter_reducer = (state, action) => {
     if (action.type === LOAD_PRODUCTS) {
+        // we need to know the most expensive product and cheapest product will be 0
+        let maxPrice = action.payload.map((p) => p.price);
+        maxPrice = Math.max(...maxPrice);
+
         return {
             ...state,
             all_products: [...action.payload],
             filtered_products: [...action.payload],
+            filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
         };
     }
 
@@ -38,8 +43,8 @@ const filter_reducer = (state, action) => {
         if (sort === 'price-highest') {
             // long way to compare sort, unlike the first one
             tempProducts = tempProducts.sort((a, b) => {
-                if (a.price < b.price) return -1;
-                if (a.price > b.price) return +1;
+                if (b.price < a.price) return -1;
+                if (b.price > a.price) return +1;
                 return 0;
             });
         }
