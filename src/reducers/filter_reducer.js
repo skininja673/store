@@ -68,7 +68,88 @@ const filter_reducer = (state, action) => {
     }
 
     if (action.type === FILTER_PRODUCTS) {
-        return { ...state };
+        // [...all_products] means a fresh copy of all_products
+        const { all_products } = state;
+        let tempProducts = [...all_products];
+        // const {
+        //     filters: {
+        //         text,
+        //         category,
+        //         company,
+        //         color,
+        //         min_price,
+        //         max_price,
+        //         price,
+        //         shipping,
+        //     },
+        // } = state;
+        const {
+            text,
+            category,
+            company,
+            color,
+            min_price,
+            max_price,
+            price,
+            shipping,
+        } = state.filters;
+
+        // filtering starts
+        // if text is not empty then
+        if (text) {
+            tempProducts = tempProducts.filter((product) =>
+                product.name.toLowerCase().startsWith(text)
+            );
+        }
+
+        // category
+        if (category !== 'all') {
+            tempProducts = tempProducts.filter(
+                (product) => product.category === category
+            );
+        }
+
+        // company
+        if (company !== 'all') {
+            tempProducts = tempProducts.filter(
+                (product) => product.company === company
+            );
+        }
+
+        // color
+        if (color !== 'all') {
+            tempProducts = tempProducts.filter((product) => {
+                return product.colors.find((c) => c === color);
+            });
+        }
+
+        // shipping
+        if (shipping) {
+            tempProducts = tempProducts.filter(
+                (product) => product.shipping === true
+            );
+        }
+
+        // price
+        tempProducts = tempProducts.filter((product) => product.price <= price);
+
+        return { ...state, filtered_products: tempProducts };
+    }
+
+    if (action.type === CLEAR_FILTERS) {
+        return {
+            ...state,
+            filters: {
+                // text is for search box
+                ...state.filters,
+                text: '',
+                category: 'all',
+                company: 'all',
+                color: 'all',
+                price: state.filters.max_price,
+                shipping: false,
+            },
+        };
     }
     throw new Error(`No Matching "${action.type}" - action type`);
 };

@@ -127,7 +127,43 @@ const Filters = () => {
                         </div>
                     </div>
                     {/* end of colors */}
+                    {/* price range */}
+                    <div className='form-control'>
+                        <h5>price</h5>
+
+                        <p className='price'>{formatPrice(price)}</p>
+                        <input
+                            type='range'
+                            name='price'
+                            onChange={updateFilters}
+                            min={min_price}
+                            max={max_price}
+                            value={price}
+                        />
+                    </div>
+                    {/* end of price range */}
+                    {/* free shipping checkbox */}
+                    <div className='form-control shipping'>
+                        <label htmlFor='shipping'>free shipping</label>
+                        <input
+                            type='checkbox'
+                            name='shipping'
+                            id='shipping'
+                            checked={shipping}
+                            onChange={updateFilters}
+                        />
+                    </div>
+                    {/* end of shipping checkbox */}
                 </form>
+                {/* clear filters button */}
+                <button
+                    type='button'
+                    className='clear-btn'
+                    onClick={clearFilters}
+                >
+                    clear filters
+                </button>
+                {/* end of clear filters button */}
             </div>
         </Wrapper>
     );
