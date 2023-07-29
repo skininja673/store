@@ -63,8 +63,17 @@ export const FilterProvider = ({ children }) => {
     };
 
     const updateFilters = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
+        let name = e.target.name;
+        let value = e.target.value;
+
+        // if name is category that means we are clicking on button
+        if (name === 'category') {
+            value = e.target.textContent;
+        }
+
+        if (name === 'color') {
+            value = e.target.dataset.color;
+        }
         dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
     };
 
