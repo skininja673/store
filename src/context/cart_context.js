@@ -8,8 +8,20 @@ import {
     COUNT_CART_TOTALS,
 } from '../actions';
 
+// this function will check weather we have data in local storage by a key of cart. if we do than do cart = {that}, if not then empty array
+const getLocalStorage = () => {
+    let cart = localStorage.getItem('cart');
+
+    // if cart is not empty, then get data from it
+    if (cart) {
+        return JSON.parse(localStorage.getItem('cart'));
+    } else {
+        return [];
+    }
+};
+
 const initialState = {
-    cart: [],
+    cart: getLocalStorage(),
     total_items: 0,
     total_mount: 0,
     shipping_fee: 534, //shipping fee is 5$ 34cents
@@ -19,6 +31,11 @@ const CartContext = React.createContext();
 
 export const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+        // set local storage with cart state
+        localStorage.setItem('cart', JSON.stringify(state.cart));
+    }, [state.cart]);
 
     // add to cart
     const addToCart = (id, color, amount, product) => {
