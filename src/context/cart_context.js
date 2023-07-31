@@ -6,6 +6,7 @@ import {
     TOGGLE_CART_ITEM_AMOUNT,
     CLEAR_CART,
     COUNT_CART_TOTALS,
+    CLEAR_FILTERS,
 } from '../actions';
 
 // this function will check weather we have data in local storage by a key of cart. if we do than do cart = {that}, if not then empty array
@@ -47,12 +48,16 @@ export const CartProvider = ({ children }) => {
     };
 
     //remove item
-    const removeItem = (id) => {};
+    const removeItem = (id) => {
+        dispatch({ type: REMOVE_CART_ITEM, payload: id });
+    };
 
     // toggle amount
     const toggleAmount = (id, value) => {};
     // clear cart
-    const clearCart = () => {};
+    const clearCart = () => {
+        dispatch({ type: CLEAR_CART });
+    };
 
     return (
         <CartContext.Provider
