@@ -35,12 +35,13 @@ function App() {
                     path='/products/:id'
                     children={<SingleProduct />}
                 />
-                <Route exact path='/checkout'>
-                    <Checkout />
-                </Route>
                 <Route exact path='*'>
                     <Error />
                 </Route>
+
+                <PrivateRoute exact path='/checkout'>
+                    <Checkout />
+                </PrivateRoute>
             </Switch>
             <Footer />
         </Router>

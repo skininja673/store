@@ -46,9 +46,6 @@ const Sidebar = () => {
                             <Link to='/checkout'>checkout</Link>
                         </li>
                     )}
-                    <li>
-                        <Link to='/checkout'>checkout</Link>
-                    </li>
                 </ul>
                 <CartButtons />
             </aside>
